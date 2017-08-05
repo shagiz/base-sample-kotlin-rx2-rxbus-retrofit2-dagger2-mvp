@@ -1,0 +1,32 @@
+apply plugin: 'pmd'
+task pmdTask(type: Pmd) {
+    ruleSets = ["java-basic", "java-braces", "java-strings", "java-design", "java-unusedcode"]
+    source = fileTree('src/main/java')
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination "$project.buildDir/outputs/pmd-output.html"
+    }
+}
+check.dependsOn pmdTask
+
+apply plugin: 'findbugs'
+
+task findbugsTask(type: FindBugs) {
+    ignoreFailures = false
+    effort = "max"
+    reportLevel = "high"
+    classes = files("$project.buildDir/intermediates/classes")
+
+    excludeFilter = file("$rootProject.rootDir/quality/findbugs-filters.xml")
+
+    source = fileTree('src/main/java/')
+    classpath = files()
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination "$project.buildDir/outputs/findbugs-output.html"
+    }
+}
+check.dependsOn findbugsTask

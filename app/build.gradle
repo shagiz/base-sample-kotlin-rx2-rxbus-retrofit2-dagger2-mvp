@@ -1,0 +1,97 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "com.shagi.detective"
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+def playServices = '11.0.4'
+def support = '26.0.0'
+def retrofit = '2.3.0'
+def dagger = '2.11'
+def butterKnife = '8.7.0'
+def okHttp = '3.8.0'
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
+
+    // support
+    implementation "com.android.support:percent:$support"
+    implementation "com.android.support:appcompat-v7:$support"
+    implementation "com.android.support:support-v13:$support"
+    implementation "com.android.support:design:$support"
+    implementation "com.android.support:preference-v7:$support"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    // rx
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.1.0'
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit", {
+        exclude group: 'com.google.code.gson'
+    }
+
+    implementation 'com.google.code.gson:gson:2.8.1'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp"
+
+    //firebase
+    implementation "com.google.firebase:firebase-core:$playServices"
+    implementation "com.google.firebase:firebase-crash:$playServices"
+
+    // testing
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.robolectric:robolectric:3.3.2'
+    testImplementation "org.robolectric:shadows-multidex:3.0"
+    testImplementation 'org.powermock:powermock-module-junit4:1.7.0'
+    testImplementation 'org.powermock:powermock-api-mockito2:1.7.0'
+    testImplementation "joda-time:joda-time:2.9.9"
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    // stetho
+    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
+    debugImplementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
+    implementation 'net.danlew:android.joda:2.9.9'
+
+    implementation "com.jakewharton:butterknife:$butterKnife"
+    kapt "com.jakewharton:butterknife-compiler:$butterKnife"
+    implementation "com.google.dagger:dagger:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+}
