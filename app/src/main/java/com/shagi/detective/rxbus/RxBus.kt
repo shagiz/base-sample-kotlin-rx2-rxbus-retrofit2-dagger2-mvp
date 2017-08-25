@@ -1,15 +1,16 @@
 package com.shagi.detective.rxbus
 
 import com.jakewharton.rxrelay2.PublishRelay
+import com.shagi.detective.rxbus.event.BaseEvent
 import io.reactivex.Observable
 
 object RxBus {
-    private val mRelay = PublishRelay.create<Any>()
+    private val mRelay = PublishRelay.create<BaseEvent>()
 
-    fun post(any: Any) {
+    fun post(any: BaseEvent) {
         mRelay.accept(any)
     }
 
-    val events: Observable<Any>
+    val events: Observable<BaseEvent>
         get() = mRelay
 }
