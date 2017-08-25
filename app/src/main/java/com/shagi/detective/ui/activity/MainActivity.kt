@@ -28,7 +28,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
 
 
-        fragmentManager.beginTransaction()
+        supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, MainTabFragment.newInstance(), MainTabFragment.TAG)
                 .commit();
     }
