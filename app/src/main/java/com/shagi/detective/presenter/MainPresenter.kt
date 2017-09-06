@@ -3,9 +3,13 @@ package com.shagi.detective.presenter
 import com.shagi.detective.presenter.base.BasePresenter
 import com.shagi.detective.presenter.view.MainView
 
-class MainPresenter : BasePresenter<MainView>() {
-    
-    override fun initView(view: MainView) {
-        super.initView(view)
+class MainPresenter(view: MainView) : BasePresenter<MainView>(view) {
+
+    override fun takeView(view: MainView) {
+        super.takeView(view)
+    }
+
+    override fun onViewAttached(view: MainView) {
+
     }
 }
